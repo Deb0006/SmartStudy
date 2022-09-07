@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+}
+.navbarContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.navbarOptions {
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-end;
+  list-style-type: none;
+}
+.link {
+  color: #000000;
+  text-decoration: none;
+}
+.logo {
+  color: #000000;
+}

@@ -1,0 +1,21 @@
+.container {
+  border: 0.2px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 3px 3px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  width: 80%;
+  height: auto;
+  padding: 1rem, 1.1rem;
+}
+.containerBottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.btn {
+  color: white;
+  background-color: #3fb1d8;
+  border-radius: 20px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
