@@ -1,9 +1,11 @@
-import MainNavigation from "./MainNavigation";
-function Layout(props) {
+import Navbar from "./Navbar";
+import { Outlet } from "react-router-dom";
+import styles from "./Layout.module.css";
+function Layout() {
   return (
-    <div>
-      <MainNavigation />
-      <main>{props.children}</main>
+    <div className={styles.wrapper}>
+      <Navbar />
+      <Outlet />
     </div>
   );
 }

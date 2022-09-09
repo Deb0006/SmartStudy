@@ -1,6 +1,7 @@
 import styles from "./Quiz.module.css";
 
 function Quiz(props) {
+  // console.log(props.name);
   return (
     <div className={styles.container}>
       <h2 className={styles.topic}>{props.name} Questions</h2>
@@ -8,7 +9,9 @@ function Quiz(props) {
       <hr />
       <div className={styles.containerBottom}>
         <h3 className={styles.amount}>{props.amount} Questions</h3>
-        <button className={styles.btn}>Start</button>
+        <button className={styles.btn} onClick={props.getQuizName}>
+          Start
+        </button>
       </div>
     </div>
   );

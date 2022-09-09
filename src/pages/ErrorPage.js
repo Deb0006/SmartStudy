@@ -1,4 +1,10 @@
+import { Link } from "react-router-dom";
 function ErrorPage() {
-  return <div>Error! Page Not Found</div>;
+  return (
+    <div>
+      <h1>Error! Page Not Found</h1>
+      <Link to="/">Back to Home Page</Link>
+    </div>
+  );
 }
 export default ErrorPage;
