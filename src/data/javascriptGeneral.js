@@ -1,4 +1,4 @@
-[
+let jsQuestions2 = [
   {
     question:
       "What are the benefits of using spread syntax and how is it different from rest syntax?",
@@ -51,3 +51,4 @@
       "Asynchronous programming is a form of programming where the execution of a program is not linear. This means that code can be executed in parallel, and that code can be executed after other code has finished executing. Asynchronous programming is important in JavaScript because it allows for more responsive user interfaces.",
   },
 ];
+export default jsQuestions2;

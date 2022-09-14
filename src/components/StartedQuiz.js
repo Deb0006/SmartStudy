@@ -3,34 +3,41 @@ import Flashcard from "./Flashcard";
 import Stats from "./Stats";
 import { useState } from "react";
 function StartedQuiz(props) {
-  //shared variables:
-  //saved question, question known ✓, question unknown ✕
-  //how many questions completed
   //how many questions completed in a row
-  const [count, setCount] = useState(0);
+  let allQuestions = props.quiz.questions;
 
+  const [count, setCount] = useState(0);
   const [stats, setStats] = useState({
     favorites: [],
     knownQuestion: [],
     unkownQuestion: [],
+    totalQuestions: allQuestions.length,
   });
   function nextQuestionKnown() {
-    if (count === props.quiz.questions.length - 1) {
-      setCount((prevCount) => (prevCount = 0));
-    } else {
-      setCount((prevCount) => prevCount + 1);
-    }
-    setStats((pevStats) => ({
-      ...pevStats,
-      knownQuestion: "",
+    allQuestions.splice(count, 1);
+    count === allQuestions.length - 1
+      ? setCount((prevCount) => (prevCount = 0))
+      : setCount((prevCount) => prevCount + 1);
+
+    setStats((prevStats) => ({
+      knownQuestion: prevStats.knownQuestion.push(allQuestions[count]),
+      ...prevStats,
     }));
   }
   function nextQuestionUnknown() {
-    if (count === props.quiz.questions.length - 1) {
-      setCount((prevCount) => (prevCount = 0));
-    } else {
-      setCount((prevCount) => prevCount + 1);
-    }
+    count === allQuestions.length - 1
+      ? setCount((prevCount) => (prevCount = 0))
+      : setCount((prevCount) => prevCount + 1);
+    setStats((prevStats) => ({
+      unkownQuestion: prevStats.unkownQuestion.push(allQuestions[count]),
+      ...prevStats,
+    }));
+  }
+  function setFavorite() {
+    setStats((prevStats) => ({
+      favorites: prevStats.favorites.push(allQuestions[count]),
+      ...prevStats,
+    }));
   }
   return (
     <div className={styles.wrapper}>
@@ -38,14 +45,24 @@ function StartedQuiz(props) {
         {props.quiz.name} Dev Interview Quiestions
       </h2>
 
-      <Flashcard question={props.quiz.questions[count]} />
-      <button className={styles.btn} onClick={nextQuestionUnknown}>
-        ❓
-      </button>
-      <button className={styles.btn}>⭐</button>
-      <button className={styles.btn} onClick={nextQuestionKnown}>
-        ✔️
-      </button>
+      {allQuestions === undefined || allQuestions.length === 0 ? (
+        <h1>
+          Congratulations, you studied all the {props.quiz.name} questions
+        </h1>
+      ) : (
+        <div>
+          <Flashcard question={allQuestions[count]} />
+          <button className={styles.btn} onClick={nextQuestionUnknown}>
+            ❓
+          </button>
+          <button className={styles.btn} onClick={setFavorite}>
+            ⭐
+          </button>
+          <button className={styles.btn} onClick={nextQuestionKnown}>
+            ✔️
+          </button>
+        </div>
+      )}
 
       <Stats stats={stats} />
     </div>

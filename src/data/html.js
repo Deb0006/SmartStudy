@@ -1,4 +1,4 @@
-let questions = [
+let htmlQuestions = [
   {
     question: "What does a doctype do?",
     answer:
@@ -60,3 +60,4 @@ let questions = [
       "I have used different HTML templating languages before, such as Handlebars.",
   },
 ];
+export default htmlQuestions;

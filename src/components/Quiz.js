@@ -1,7 +1,6 @@
 import styles from "./Quiz.module.css";
 
 function Quiz(props) {
-  // console.log(props.name);
   return (
     <div className={styles.container}>
       <h2 className={styles.topic}>{props.name} Questions</h2>

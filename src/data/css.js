@@ -1,4 +1,4 @@
-let questions = [
+let cssQuestions = [
   {
     question: "CSS selector specificity and how does it work?",
     answer:
@@ -176,4 +176,4 @@ let questions = [
   },
 ];
 
-export default questions;
+export default cssQuestions;

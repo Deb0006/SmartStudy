@@ -1,4 +1,4 @@
-let questions = [
+let jsQuestions = [
   {
     question: "Explain event delegation",
     answer:
@@ -299,4 +299,4 @@ let questions = [
   },
 ];
 
-console.log(questions.length);
+export default jsQuestions;
