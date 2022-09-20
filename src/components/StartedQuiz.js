@@ -3,7 +3,6 @@ import Flashcard from "./Flashcard";
 import Stats from "./Stats";
 import { useState } from "react";
 function StartedQuiz(props) {
-  //how many questions completed in a row
   let allQuestions = props.quiz.questions;
 
   const [count, setCount] = useState(0);
@@ -52,19 +51,21 @@ function StartedQuiz(props) {
       ) : (
         <div>
           <Flashcard question={allQuestions[count]} />
-          <button className={styles.btn} onClick={nextQuestionUnknown}>
-            ❓
-          </button>
-          <button className={styles.btn} onClick={setFavorite}>
-            ⭐
-          </button>
-          <button className={styles.btn} onClick={nextQuestionKnown}>
-            ✔️
-          </button>
+          <div className={styles.btnContainer}>
+            <button className={styles.btn} onClick={nextQuestionUnknown}>
+              ❓
+            </button>
+            <button className={styles.btn} onClick={setFavorite}>
+              ⭐
+            </button>
+            <button className={styles.btn} onClick={nextQuestionKnown}>
+              ✔️
+            </button>
+          </div>
         </div>
       )}
 
-      <Stats stats={stats} />
+      <Stats stats={stats} value={count} />
     </div>
   );
 }

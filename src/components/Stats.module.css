@@ -1,0 +1,35 @@
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+.containerTop {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-content: center;
+  padding: 2rem 0;
+}
+.containerTop h2 {
+  grid-column: span 3;
+  grid-row-start: 1;
+  margin: 0 auto;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  color: #3d3d3d;
+  padding-bottom: 1rem;
+}
+.containerTop p {
+  margin: 0 auto;
+}
+.progressBar {
+  background: #ffffff;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 0 2rem;
+}
+.progressBar progress {
+  height: 20px;
+  transition: all 0.5s;
+  width: 100%;
+}

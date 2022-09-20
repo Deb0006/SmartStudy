@@ -7,12 +7,10 @@ function Flashcard(props) {
   }
   return (
     <div onClick={handleClick} className={styles.container}>
-      {/* <div>display question:{props.question.question} </div>
-      <div>display answer:{props.question.answer} </div> */}
       {isFlipped ? (
-        <div className={styles.front}>{props.question.question}</div>
+        <div className={styles.front}>{props.question.answer}</div>
       ) : (
-        <div className={styles.back}>{props.question.answer}</div>
+        <div className={styles.back}>{props.question.question}</div>
       )}
     </div>
   );
