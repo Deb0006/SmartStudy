@@ -3,6 +3,8 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import Layout from "./components/layout/Layout";
+// import DATA from "./data/allQuestions";
+
 function App() {
   return (
     <Router>
