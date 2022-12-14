@@ -1,0 +1,15 @@
+.cardsContainer {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 2rem;
+  padding: 0;
+  padding-top: 2rem;
+  transition: 1s;
+}
+@media screen and (min-width: 768px) {
+  .cardsContainer {
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+}

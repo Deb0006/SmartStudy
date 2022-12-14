@@ -45,10 +45,9 @@ function Home() {
   return (
     <div>
       <h1>Hi There</h1>
-
       {startQuiz.start ? (
         <div>
-          <button onClick={restartQuiz}>Close practice</button>
+          <button onClick={restartQuiz}>⮌</button>
           <StartedQuiz quiz={startQuiz} />
         </div>
       ) : (
