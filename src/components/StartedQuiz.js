@@ -1,13 +1,9 @@
 import styles from "./StartedQuiz.module.css";
 import Flashcard from "./Flashcard";
 import Stats from "./Stats";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 function StartedQuiz(props) {
-  // let allQuestions = props.quiz.questions;
   const [allQuestions, setAllQuestions] = useState(props.quiz.questions);
-  const [count, setCount] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(allQuestions[count]);
-  const [fail, setFail] = useState([]);
 
   const [stats, setStats] = useState({
     favorites: [],
@@ -17,54 +13,22 @@ function StartedQuiz(props) {
     totalQuestions: props.quiz.questions.length,
   });
 
-  console.log(allQuestions);
-  console.log("count:", count, "attempt", stats.attempt, "fail:", fail);
-
-  useEffect(() => {
-    setCurrentQuestion(() => allQuestions[count]);
-  }, [count, allQuestions, fail]);
-  useEffect(() => {}, [fail]);
-
-  function checkAll() {
-    console.log("chacking all:", count);
-    setAllQuestions((prevQ) => {
-      return prevQ.filter((x, i) => fail.includes(i));
-    });
-    setStats((prevStats) => ({
-      unknownQuestions: prevStats.unknownQuestions.push(fail),
-      ...prevStats,
-    }));
-    setFail((prevF) => []);
-    setStats((prevStats) => ({
-      attempt: prevStats.attempt + 1,
-      ...prevStats,
-    }));
-  }
-
   function nextQuestion() {
-    //if count is the last index
-    if (count === allQuestions.length - 1) {
-      setCount((prevCount) => (prevCount = 0));
-      checkAll();
-    } else {
-      setCount((prevCount) => prevCount + 1);
-    }
-
-    console.log("fail", fail);
+    setAllQuestions((prevQ) => {
+      return prevQ.filter((q, i) => i !== 0);
+    });
   }
 
   function nextQuestionUnknown() {
-    console.log("question number:", parseInt(currentQuestion.index));
-    setFail((prevF) => [...prevF, currentQuestion.index]);
-    console.log("curent question:", currentQuestion);
-    console.log("fail:", fail.length);
-    //if count is the last index
-    nextQuestion();
+    setAllQuestions((prevQ) => [...prevQ, allQuestions[0]]);
+    setAllQuestions((prevQ) => {
+      return prevQ.filter((q, i) => i !== 0);
+    });
   }
 
   function setFavorite() {
     setStats((prevStats) => ({
-      favorites: prevStats.favorites.push(allQuestions[count]),
+      favorites: prevStats.favorites.push(allQuestions[0]),
       ...prevStats,
     }));
   }
@@ -81,7 +45,7 @@ function StartedQuiz(props) {
         </h1>
       ) : (
         <div>
-          <Flashcard question={currentQuestion} />
+          <Flashcard question={allQuestions[0]} />
           <div className={styles.btnContainer}>
             <button className={styles.btn} onClick={nextQuestionUnknown}>
               ❓
