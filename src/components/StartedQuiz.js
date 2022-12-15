@@ -4,19 +4,52 @@ import Stats from "./Stats";
 import { useState } from "react";
 function StartedQuiz(props) {
   const [allQuestions, setAllQuestions] = useState(props.quiz.questions);
-
   const [stats, setStats] = useState({
+    questionID: props.quiz.id,
     favorites: [],
-    attempt: 0,
-    knownQuestion: [],
-    unknownQuestions: [],
+    streak: 1,
+    longestStreak: 1,
+    attempts: [],
     totalQuestions: props.quiz.questions.length,
   });
-
+  console.log(stats.attempts);
   function nextQuestion() {
     setAllQuestions((prevQ) => {
       return prevQ.filter((q, i) => i !== 0);
     });
+    // set streak
+    setStats((prevStats) => ({
+      ...prevStats,
+      streak: prevStats.streak + 1,
+    }));
+    // save longest streak
+    if (stats.streak > stats.longestStreak) {
+      setStats((prevStats) => ({
+        ...prevStats,
+        longestStreak: prevStats.longestStreak + 1,
+      }));
+    }
+    const currentAttempt = stats.attempts.find(
+      (a) => a.index === allQuestions[0].index
+    );
+    if (!currentAttempt) {
+      setStats((prevStats) => ({
+        ...prevStats,
+        attempts: [
+          ...prevStats.attempts,
+          { index: allQuestions[0].index, attempt: 1 },
+        ],
+      }));
+    } else {
+      setStats((prevStats) => ({
+        ...prevStats,
+        attempts: prevStats.attempts.map((a) =>
+          a.index === allQuestions[0].index
+            ? { ...a, attempt: a.attempt + 1 }
+            : a
+        ),
+      }));
+    }
   }
 
   function nextQuestionUnknown() {
@@ -24,13 +57,42 @@ function StartedQuiz(props) {
     setAllQuestions((prevQ) => {
       return prevQ.filter((q, i) => i !== 0);
     });
+    // restart streak
+    setStats((prevStats) => ({
+      ...prevStats,
+      streak: 1,
+    }));
+    const currentAttempt = stats.attempts.find(
+      (a) => a.index === allQuestions[0].index
+    );
+    if (!currentAttempt) {
+      setStats((prevStats) => ({
+        ...prevStats,
+        attempts: [
+          ...prevStats.attempts,
+          { index: allQuestions[0].index, attempt: 1 },
+        ],
+      }));
+    } else {
+      setStats((prevStats) => ({
+        ...prevStats,
+        attempts: prevStats.attempts.map((a) =>
+          a.index === allQuestions[0].index
+            ? { ...a, attempt: a.attempt + 1 }
+            : a
+        ),
+      }));
+    }
   }
 
+  // save favorite
   function setFavorite() {
-    setStats((prevStats) => ({
-      favorites: prevStats.favorites.push(allQuestions[0]),
-      ...prevStats,
-    }));
+    if (!stats.favorites.includes(allQuestions[0])) {
+      setStats((prevStats) => ({
+        favorites: prevStats.favorites.push(allQuestions[0]),
+        ...prevStats,
+      }));
+    }
   }
 
   return (

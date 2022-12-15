@@ -17,7 +17,7 @@ function Flashcard(props) {
         <div className={styles.front}>{props.question.answer}</div>
       ) : (
         <div className={styles.back}>
-          <b>{props.question.question}</b>
+          <b>{props.question.index + ". " + props.question.question}</b>
         </div>
       )}
     </div>
