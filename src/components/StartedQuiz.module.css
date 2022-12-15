@@ -10,20 +10,22 @@
 }
 
 .btn {
-  background-color: #3fb1d8;
+  background-color: #62b6cb;
   color: white;
-  box-shadow: 0px 10px 30px rgba(63, 177, 216, 0.43);
-  border-radius: 50px;
+  /* box-shadow: 0px 10px 30px rgba(63, 177, 216, 0.43); */
+  border-radius: 10px;
   width: 60px;
-  height: 60px;
+  height: 40px;
   cursor: pointer;
   border: none;
-  padding: rem 0;
   transition: 0.4s;
+  color: transparent;
+  text-shadow: 0 0 0 rgb(255, 255, 255);
 }
 .btn:active {
   box-shadow: 2px 2px 5px #ffffff;
 }
 .btn:hover {
   background-color: #05bbd3;
+  color: none;
 }

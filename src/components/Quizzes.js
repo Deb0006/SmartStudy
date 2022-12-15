@@ -7,7 +7,7 @@ function Quizzes(props) {
         Start a new practice by selecting the type of questions and click on the
         Start button
       </p>
-      <div class={styles.cardsContainer}>
+      <div className={styles.cardsContainer}>
         {props.quizzes.map((quiz) => (
           <Quiz
             key={quiz.id}

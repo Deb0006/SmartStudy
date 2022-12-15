@@ -4,7 +4,7 @@ function Flashcard(props) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    setIsFlipped((prevF) => false);
+    setIsFlipped(false);
   }, [props.question.answer]);
 
   function handleClick() {
@@ -17,7 +17,7 @@ function Flashcard(props) {
         <div className={styles.front}>{props.question.answer}</div>
       ) : (
         <div className={styles.back}>
-          {props.question.index + props.question.question}
+          <b>{props.question.question}</b>
         </div>
       )}
     </div>

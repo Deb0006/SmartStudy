@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { db } from "../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
+import styles from "./Home.module.css";
 // import allQuestions from "../data/allQuestions";
 const quizzesCollectionRef = collection(db, "DATA");
 
@@ -43,7 +44,7 @@ function Home() {
     });
   }
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Hi There</h1>
       {startQuiz.start ? (
         <div>
