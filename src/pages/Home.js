@@ -10,6 +10,11 @@ const quizzesCollectionRef = collection(db, "DATA");
 
 function Home() {
   const [DATA, setData] = useState([]);
+  const [startQuiz, setStartQuiz] = useState({
+    start: false,
+    id: nanoid(),
+  });
+  // fetch data from DB
   useEffect(() => {
     const getQuizzes = async () => {
       const data = await getDocs(quizzesCollectionRef);
@@ -18,29 +23,30 @@ function Home() {
     getQuizzes();
   }, []);
 
-  const [startQuiz, setStartQuiz] = useState({
-    start: false,
-    id: nanoid(),
-  });
+  // back button that restarts the quiz
   function restartQuiz() {
     setStartQuiz({
       id: nanoid(),
       start: false,
     });
   }
+
+  // Start the quiz according to user selection
   function startTheQuiz(name) {
-    let questions;
+    let selectedQuestions;
+    let selectedID;
     for (let quiz of DATA) {
       if (quiz.name === name) {
-        questions = quiz.questions;
-        console.log(questions);
+        selectedQuestions = quiz.questions;
+        selectedID = quiz.id;
       }
     }
     setStartQuiz({
-      id: nanoid(),
+      idAttempt: nanoid(),
+      idQuiz: selectedID,
       start: true,
       name: name,
-      questions: questions,
+      questions: selectedQuestions,
     });
   }
   return (
@@ -53,6 +59,7 @@ function Home() {
         </div>
       ) : (
         <div>
+          {/* Cards of quizzes to choose from */}
           <Quizzes quizzes={DATA} startTheQuiz={startTheQuiz} />
         </div>
       )}

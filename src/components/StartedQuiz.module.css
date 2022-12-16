@@ -12,7 +12,6 @@
 .btn {
   background-color: #62b6cb;
   color: white;
-  /* box-shadow: 0px 10px 30px rgba(63, 177, 216, 0.43); */
   border-radius: 10px;
   width: 60px;
   height: 40px;
@@ -27,5 +26,5 @@
 }
 .btn:hover {
   background-color: #05bbd3;
-  color: none;
+  color: #ffffff;
 }
