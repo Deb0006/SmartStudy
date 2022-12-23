@@ -15,13 +15,13 @@ function Navbar() {
           className={toggle ? styles.navbarOptions : styles.navbarOptionshidden}
         >
           <li>
-            <Link to="/about" className={styles.link}>
-              About
+            <Link to="/" className={styles.link}>
+              Home
             </Link>
           </li>
           <li>
-            <Link to="/" className={styles.link}>
-              Start Practice
+            <Link to="/about" className={styles.link}>
+              About
             </Link>
           </li>
         </ul>
