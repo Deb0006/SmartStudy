@@ -114,7 +114,7 @@ function StartedQuiz(props) {
           <Flashcard question={allQuestions[0]} index={currentIndex} />
           <div className={styles.btnContainer}>
             <button className={styles.btn} onClick={nextQuestionUnknown}>
-              ❓
+              ❌
             </button>
             <button className={styles.btn} onClick={setFavorite}>
               ⭐
