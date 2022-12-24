@@ -54,7 +54,7 @@ function Home() {
       <h1>Hi There</h1>
       {startQuiz.start ? (
         <div>
-          <button onClick={restartQuiz}>⮌</button>
+          <button onClick={restartQuiz}>←</button>
           <StartedQuiz quiz={startQuiz} />
         </div>
       ) : (

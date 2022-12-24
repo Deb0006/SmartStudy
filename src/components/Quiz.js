@@ -3,6 +3,7 @@ import styles from "./Quiz.module.css";
 function Quiz(props) {
   return (
     <div className={styles.container}>
+      <div className={styles.backgroundImg}></div>
       <h2 className={styles.topic}>{props.name} Questions</h2>
       <p className={styles.subject}>Web Development</p>
       <hr
