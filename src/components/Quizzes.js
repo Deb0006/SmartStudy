@@ -4,8 +4,8 @@ function Quizzes(props) {
   return (
     <div>
       <p>
-        Start a new practice by selecting the type of questions and click on the
-        Start button
+        Start a new practice by clicking on the Start button to select the type
+        of questions
       </p>
       <div className={styles.cardsContainer}>
         {props.quizzes.map((quiz) => (

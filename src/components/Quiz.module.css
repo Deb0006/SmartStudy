@@ -22,9 +22,8 @@
       rgba(187, 221, 236, 0.78) 46.52%,
       rgba(65, 198, 255, 0) 100%
     ),
-    linear-gradient(41deg, #fcfbee 4.33%, rgba(255, 252, 230, 0) 73.7%);
+    linear-gradient(41deg, #fffdeb 4.33%, rgba(255, 252, 230, 0) 73.7%);
   background-blend-mode: normal, normal, normal, normal, normal, normal;
-  filter: blur(52px);
 }
 .containerBottom {
   display: flex;
