@@ -1,21 +1,41 @@
 import styles from "./StartedQuiz.module.css";
 import Flashcard from "./Flashcard";
 import Stats from "./Stats";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 function StartedQuiz(props) {
   const [allQuestions, setAllQuestions] = useState(props.quiz.questions);
   const [stats, setStats] = useState({
     questionID: props.quiz.id,
-    favorites: [],
+    totalFavorites: [],
     streak: 1,
     longestStreak: 1,
     attempts: [],
     totalQuestions: props.quiz.questions.length,
   });
   const currentIndex = props.quiz.questions.indexOf(allQuestions[0]);
+  let fav = false;
+
+  // set attempt to one and favorite to false inside attempts per questions
+  useEffect(() => {
+    for (let i = 0; i < props.quiz.questions.length; i++) {
+      setStats((prevStats) => ({
+        ...prevStats,
+        attempts: [
+          ...prevStats.attempts,
+          {
+            question: props.quiz.questions[i],
+            attempt: 0,
+            id: nanoid(),
+            favorites: false,
+          },
+        ],
+      }));
+    }
+  }, [props.quiz.questions]);
 
   function nextQuestion() {
+    // remove question
     setAllQuestions((prevQ) => {
       return prevQ.filter((q, i) => i !== 0);
     });
@@ -31,26 +51,13 @@ function StartedQuiz(props) {
         longestStreak: prevStats.longestStreak + 1,
       }));
     }
-    // save how many attempts per question
-    const currentAttempt = stats.attempts.find((a) => a.index === currentIndex);
-    if (!currentAttempt) {
-      console.log(" this");
-      setStats((prevStats) => ({
-        ...prevStats,
-        attempts: [
-          ...prevStats.attempts,
-          { index: currentIndex, attempt: 1, id: nanoid() },
-        ],
-      }));
-    } else {
-      console.log(" and here");
-      setStats((prevStats) => ({
-        ...prevStats,
-        attempts: prevStats.attempts.map((a) =>
-          a.index === currentIndex ? { ...a, attempt: a.attempt + 1 } : a
-        ),
-      }));
-    }
+    // set add # of attempts per question
+    setStats((prevStats) => ({
+      ...prevStats,
+      attempts: prevStats.attempts.map((a) =>
+        a.question === allQuestions[0] ? { ...a, attempt: a.attempt + 1 } : a
+      ),
+    }));
   }
 
   function nextQuestionUnknown() {
@@ -63,54 +70,49 @@ function StartedQuiz(props) {
       ...prevStats,
       streak: 1,
     }));
-
-    //set number of attempts per question
-    const currentAttempt = stats.attempts.find(
-      (a) => a.index === allQuestions[0].index
-    );
-    console.log("here");
-    if (!currentAttempt) {
-      setStats((prevStats) => ({
-        ...prevStats,
-        attempts: [
-          ...prevStats.attempts,
-          { index: currentIndex, attempt: 1, id: nanoid() },
-        ],
-      }));
-    } else {
-      console.log(" and here");
-      setStats((prevStats) => ({
-        ...prevStats,
-        attempts: prevStats.attempts.map((a) =>
-          a.index === currentIndex ? { ...a, attempt: a.attempt + 1 } : a
-        ),
-      }));
-    }
+    //set # of attempts per question
+    setStats((prevStats) => ({
+      ...prevStats,
+      attempts: prevStats.attempts.map((a) =>
+        a.question === allQuestions[0] ? { ...a, attempt: a.attempt + 1 } : a
+      ),
+    }));
   }
 
-  // save favorite
+  // save favorites
   function setFavorite() {
-    if (!stats.favorites.includes(allQuestions[0])) {
+    fav = !fav;
+    if (fav && !stats.totalFavorites.includes(allQuestions[0].question)) {
       setStats((prevStats) => ({
-        favorites: prevStats.favorites.push(allQuestions[0]),
+        totalFavorites: prevStats.totalFavorites.push(allQuestions[0].question),
+        ...prevStats,
+      }));
+    } else if (stats.totalFavorites.includes(allQuestions[0].question)) {
+      setStats((prevStats) => ({
+        totalFavorites: prevStats.totalFavorites.pop(),
         ...prevStats,
       }));
     }
+    setStats((prevStats) => ({
+      ...prevStats,
+      attempts: prevStats.attempts.map((a) =>
+        a.question === allQuestions[0] ? { ...a, favorites: !a.favorites } : a
+      ),
+    }));
   }
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.topic}>
-        {props.quiz.name} Dev Interview Questions
-      </h2>
-
       {/* if all questions are answered */}
       {allQuestions === undefined || allQuestions.length === 0 ? (
-        <h1>
+        <h2>
           Congratulations, you studied all the {props.quiz.name} questions
-        </h1>
+        </h2>
       ) : (
         <div>
+          <h2 className={styles.topic}>
+            {props.quiz.name} Dev Interview Questions
+          </h2>
           <Flashcard question={allQuestions[0]} index={currentIndex} />
           <div className={styles.btnContainer}>
             <button className={styles.btn} onClick={nextQuestionUnknown}>
@@ -129,6 +131,7 @@ function StartedQuiz(props) {
       <Stats
         stats={stats}
         value={props.quiz.questions.length - allQuestions.length}
+        questions={props.quiz.questions}
       />
     </div>
   );
