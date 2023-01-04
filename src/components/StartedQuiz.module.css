@@ -3,10 +3,10 @@
 }
 .btnContainer {
   margin: 0 auto;
-  width: 70%;
+  width: 90%;
   display: flex;
   justify-content: space-evenly;
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .btn {
@@ -22,6 +22,9 @@
   background-color: #05bbd3;
 }
 @media screen and (min-width: 768px) {
+  .btnContainer {
+    width: 70%;
+  }
   .btn {
     transition: 0.4s;
     color: transparent;
