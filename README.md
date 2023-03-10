@@ -1,3 +1,6 @@
+## SmartStudy
+SmartStudy is an interactive web application designed to help you study more efficiently. With SmartStudy, you can use the created flashcards to quickly prepare for tests, interviews, and other important events.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
